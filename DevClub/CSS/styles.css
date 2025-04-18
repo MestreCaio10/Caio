@@ -1,0 +1,5 @@
+* {
+     box-sizing: border-box; /*o tamanho da div é absoluto, novos valores não somam nas dimensões */
+    box-sizing: content-box; /*o tamano da div é mutável, novos valores somam nas dimensões */
+
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentários</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <header>
+        <img id="logo" src="./fundos-do-batman (2).jpg"/>
+        <nav>
+            <ul>
+                <a href="./index.html">
+                    <li>Home</li>
+                </a>
+                <a href="./contato.html">
+                    <li>Contato</li>
+                </a>
+                <a href="./fotos.html">
+                    <li>Fotos</li>
+                </a>
+                <a href="./coments.html">
+                    <li>Comentários</li>
+                </a>
+            </ul>
+        </nav>
+    </header>
+    <div class="container-coments">
+        <h2>Deixe seu comentário</h2>
+        <div class="comment-box">
+            <textarea id="commentInput" placeholder="Escreva seu comentário..."></textarea>
+            <button onclick="addComment()">Enviar</button>
+        </div>
+        <div class="comments" id="commentsList">
+            <!-- Comentários serão adicionados aqui -->
+        </div>
+    </div>
+
+    <script>
+        function addComment() {
+            let commentInput = document.getElementById("commentInput");
+            let commentText = commentInput.value.trim();
+            
+            if (commentText !== "") {
+                let commentList = document.getElementById("commentsList");
+                let newComment = document.createElement("div");
+                newComment.classList.add("comment");
+                newComment.textContent = commentText;
+                commentList.prepend(newComment);
+                commentInput.value = "";
+            }
+        }
+    </script>
+    <footer>
+        <img style="object-fit: contain;" id="logo" src="./fundos-do-batman (2).jpg"/>
+        <span>Todos os direitos reservados ©</span>
+        <span>Desenvolvido por: Caio Felicio</span>
+
+        <nav class="footer-navigation">
+            <ul class="footer-list">
+                <a href="./index.html">
+                    <li>Home</li>
+                </a>
+                <a href="./contato.html">
+                    <li>Contato</li>
+                </a>
+                <a href="./fotos.html">
+                    <li>Fotos</li>
+                </a>
+                <a href="./coments.html">
+                    <li>Comentários</li>
+                </a>
+            </ul>
+        </nav>
+    </footer>
+</body>
+</html>
