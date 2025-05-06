@@ -1,0 +1,128 @@
+🏗️ Situação Exemplo: Sistema de uma Escola
+Cenário:
+Vamos criar um sistema simples de uma escola com as seguintes entidades:
+
+Pessoa (classe base com herança)
+
+Aluno e Professor (herdam de Pessoa)
+
+Turma (tem Alunos — agregação)
+
+Endereço (faz parte de Pessoa — composição)
+
+🧠 Conceitos Aplicados
+1. Herança
+Aluno e Professor herdam de Pessoa.
+
+2. Composição
+Uma Pessoa possui um Endereço. Se a Pessoa for destruída, o Endereço também será — forte dependência.
+
+3. Agregação
+A Turma possui uma lista de Alunos. Eles existem independentemente da Turma — relação mais fraca.
+
+💻 Código em Java
+
+// Composição
+class Endereco {
+    private String rua;
+    private String cidade;
+
+    public Endereco(String rua, String cidade) {
+        this.rua = rua;
+        this.cidade = cidade;
+    }
+
+    public void mostrarEndereco() {
+        System.out.println(rua + ", " + cidade);
+    }
+}
+
+// Superclasse - Herança
+class Pessoa {
+    protected String nome;
+    protected Endereco endereco; // Composição
+
+    public Pessoa(String nome, Endereco endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+
+    public void mostrarDados() {
+        System.out.println("Nome: " + nome);
+        System.out.print("Endereço: ");
+        endereco.mostrarEndereco();
+    }
+}
+
+// Subclasse - Herança
+class Aluno extends Pessoa {
+    private String matricula;
+
+    public Aluno(String nome, Endereco endereco, String matricula) {
+        super(nome, endereco);
+        this.matricula = matricula;
+    }
+
+    @Override
+    public void mostrarDados() {
+        super.mostrarDados();
+        System.out.println("Matrícula: " + matricula);
+    }
+}
+
+// Subclasse - Herança
+class Professor extends Pessoa {
+    private String disciplina;
+
+    public Professor(String nome, Endereco endereco, String disciplina) {
+        super(nome, endereco);
+        this.disciplina = disciplina;
+    }
+
+    @Override
+    public void mostrarDados() {
+        super.mostrarDados();
+        System.out.println("Disciplina: " + disciplina);
+    }
+}
+
+// Agregação
+import java.util.List;
+
+class Turma {
+    private String nomeTurma;
+    private List<Aluno> alunos;
+
+    public Turma(String nomeTurma, List<Aluno> alunos) {
+        this.nomeTurma = nomeTurma;
+        this.alunos = alunos;
+    }
+
+    public void listarAlunos() {
+        System.out.println("Turma: " + nomeTurma);
+        for (Aluno aluno : alunos) {
+            aluno.mostrarDados();
+            System.out.println("----");
+        }
+    }
+}
+
+
+✅ Testando tudo
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        Endereco end1 = new Endereco("Rua A", "São Paulo");
+        Endereco end2 = new Endereco("Rua B", "Campinas");
+
+        Aluno aluno1 = new Aluno("João", end1, "123");
+        Aluno aluno2 = new Aluno("Maria", end2, "456");
+
+        Turma turma = new Turma("3º Ano", Arrays.asList(aluno1, aluno2));
+
+        turma.listarAlunos();
+    }
+}
+
